@@ -437,8 +437,9 @@ def test_sim_hfield(sim):
     vis_marker_keys = {'heightmap':[]}
     for i in range(map_dim):
         x, y, z = local_grid_rotated[i][0], local_grid_rotated[i][1], hfield_map[i] + 0.02
+        so3 = R.from_euler('xyz', [0, 0, 0]).as_matrix()
         id = test_sim.viewer.add_marker("sphere", "", [x,y,z],
-            [0.015, 0.015, 0.005], [0.8, 1, 0.8, 1.0], euler2so3(z=0, x=0, y=0))
+            [0.015, 0.015, 0.005], [0.8, 1, 0.8, 1.0], so3)
         vis_marker_keys['heightmap'].append(id)
     render_state = test_sim.viewer_render()
     while render_state:
