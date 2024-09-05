@@ -3,7 +3,7 @@ from scipy.spatial.transform import Rotation as R
 
 from env.tasks.locomotionclockenv.locomotionclockenv import LocomotionClockEnv
 from util.colors import FAIL, ENDC
-from util.quaternion import *
+from util.quaternion import quaternion_distance, mj2scipy, scipy2mj
 
 
 def compute_rewards(self: LocomotionClockEnv, action):

@@ -2,7 +2,7 @@ import mujoco as mj
 import numpy as np
 import pathlib
 
-from sim import MujocoSim
+from sim.mujoco_sim import MujocoSim
 
 
 class MjDigitSim(MujocoSim):

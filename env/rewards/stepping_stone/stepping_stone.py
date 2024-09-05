@@ -2,7 +2,7 @@ import numpy as np
 
 from env.tasks.stoneenv.stoneenv import StoneEnv
 from util.colors import FAIL, ENDC
-from util.quaternion import quaternion_distance, euler2quat
+from util.quaternion import quaternion_distance
 
 
 def compute_rewards(self: StoneEnv, action):
@@ -96,7 +96,6 @@ def compute_rewards(self: StoneEnv, action):
 def compute_done(self: StoneEnv):
     base_pose = self.sim.get_body_pose(self.sim.base_body_name)
     target_quat = np.array([1, 0, 0, 0])
-    command_quat = euler2quat(z = self.orient_add, y = 0, x = 0)
     orientation_error = 3 * quaternion_distance(base_pose[3:], target_quat)
     base_height = base_pose[2]
     if np.exp(-orientation_error) < 0.8 or base_height < 0.5:

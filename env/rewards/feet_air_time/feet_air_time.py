@@ -2,7 +2,7 @@ import numpy as np
 from scipy.spatial.transform import Rotation as R
 
 from env.tasks.locomotionenv.locomotionenv import LocomotionEnv
-from util.quaternion import *
+from util.quaternion import quaternion_distance, mj2scipy, scipy2mj
 
 
 def compute_rewards(self: LocomotionEnv, action):

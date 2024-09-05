@@ -3,11 +3,9 @@ import numpy as np
 import time
 from types import SimpleNamespace
 
-from sim import (
-    MjCassieSim,
-    LibCassieSim,
-    MjDigitSim
-)
+from sim.cassie_sim.lib_cassiesim import LibCassieSim
+from sim.cassie_sim.mj_cassiesim import MjCassieSim
+from sim.digit_sim.mj_digitsim import MjDigitSim
 from util.env_factory import env_factory
 
 def sampling_speed():

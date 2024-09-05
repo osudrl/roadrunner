@@ -1,8 +1,8 @@
 import torch
 
-from nn.actor import FFActor, LSTMActor, MixActor
-from nn.critic import FFCritic, LSTMCritic, MixCritic
-from nn.base import FFBase, LSTMBase, MixBase
+from nn.actor import FFActor, LSTMActor
+from nn.critic import FFCritic, LSTMCritic
+from nn.base import FFBase, LSTMBase
 from util.colors import FAIL, ENDC, OKGREEN
 
 state_size = 50
@@ -30,16 +30,6 @@ def test_base_module(base_partial):
         assert lstm_base._base_forward(x_batch).size(dim=1) == traj_length, f"{lstm_base.__class__.__name__} traj length output wrong size."
         assert lstm_base._base_forward(x_batch).size(dim=2) == lstm_layers[-1], f"{lstm_base.__class__.__name__} output wrong size."
         print("Passed LSTMBase")
-    elif base_partial == MixBase:
-        mix_base = MixBase(in_dim=state_size, state_dim=40, nonstate_dim=10, lstm_layers=lstm_layers,
-                            ff_layers=ff_layers, nonstate_encoder_dim=10)
-        mix_base.init_hidden_state()
-        assert mix_base._base_forward(x).size(dim=0) == ff_layers[-1], f"{lstm_base.__class__.__name__} output wrong size."
-        mix_base.init_hidden_state()
-        assert mix_base._base_forward(x_batch).size(dim=0) == num_traj, f"{lstm_base.__class__.__name__} num traj output wrong size."
-        assert mix_base._base_forward(x_batch).size(dim=1) == traj_length, f"{lstm_base.__class__.__name__} traj length output wrong size."
-        assert mix_base._base_forward(x_batch).size(dim=2) == ff_layers[-1], f"{lstm_base.__class__.__name__} output wrong size."
-        print("Passed MixBase")
     else:
         raise RuntimeError(f"No such base module exists for {base_partial().__class__.__name__}")
 
@@ -63,18 +53,6 @@ def test_actor_module(actor_partial):
         assert lstm_actor.forward(x_batch).size(dim=2) == action_size, f"{lstm_actor.__class__.__name__} output wrong size."
         test_actor_forward(lstm_actor)
         print("Pass forward test for LSTM Actor")
-    elif actor_partial == MixActor:
-        mix_actor = MixActor(obs_dim=state_size, state_dim=40, nonstate_dim=10, action_dim=action_size,
-                             lstm_layers=lstm_layers, ff_layers=ff_layers, bounded=True,
-                             learn_std=False, std=0.1, nonstate_encoder_dim=10, nonstate_encoder_on=True)
-        action = mix_actor.forward(x, deterministic=False, update_normalization_param=False)
-        assert action.size(dim=0) == action_size, f"{mix_actor.__class__.__name__} output wrong size."
-        action = mix_actor.forward(x_batch, deterministic=False, update_normalization_param=False)
-        assert mix_actor.forward(x_batch).size(dim=0) == num_traj, f"{mix_actor.__class__.__name__} num traj output wrong size."
-        assert mix_actor.forward(x_batch).size(dim=1) == traj_length, f"{mix_actor.__class__.__name__} traj length output wrong size."
-        assert mix_actor.forward(x_batch).size(dim=2) == action_size, f"{mix_actor.__class__.__name__} output wrong size."
-        test_actor_forward(mix_actor)
-        print("Pass forward test for Mix Actor")
     else:
         raise RuntimeError(f"No such base module exists for {actor_partial().__class__.__name__}")
 
@@ -94,16 +72,6 @@ def test_critic_module(critic_partial):
         assert lstm_critic.forward(x_batch).size(dim=1) == traj_length, f"{lstm_critic.__class__.__name__} traj length output wrong size."
         assert lstm_critic.forward(x_batch).size(dim=2) == 1, f"{lstm_critic.__class__.__name__} output wrong size."
         print("Passed LSTM Critic")
-    elif critic_partial == MixCritic:
-        mix_critic = MixCritic(input_dim=state_size, state_dim=40, nonstate_dim=10,
-                            lstm_layers=lstm_layers, ff_layers=ff_layers, nonstate_encoder_dim=10, nonstate_encoder_on=True)
-        action = mix_critic.forward(x, update_normalization_param=False)
-        assert action.size(dim=0) == 1, f"{mix_critic.__class__.__name__} output wrong size."
-        action = mix_critic.forward(x_batch, update_normalization_param=False)
-        assert mix_critic.forward(x_batch).size(dim=0) == num_traj, f"{mix_critic.__class__.__name__} num traj output wrong size."
-        assert mix_critic.forward(x_batch).size(dim=1) == traj_length, f"{mix_critic.__class__.__name__} traj length output wrong size."
-        assert mix_critic.forward(x_batch).size(dim=2) == 1, f"{mix_critic.__class__.__name__} output wrong size."
-        print("Passed Mix Critic")
     else:
         raise RuntimeError(f"No such base module exists for {critic_partial().__class__.__name__}")
 
@@ -136,9 +104,9 @@ def test_actor_forward(actor):
 def test_nn():
     # Insert any module into this list to enable test. Can define customized test as well.
     # Some base modules require specific forward pass tests.
-    base_modules = [FFBase, LSTMBase, MixBase]
-    actor_modules = [FFActor, LSTMActor, MixActor]
-    critic_modules = [FFCritic, LSTMCritic, MixCritic]
+    base_modules = [FFBase, LSTMBase]
+    actor_modules = [FFActor, LSTMActor]
+    critic_modules = [FFCritic, LSTMCritic]
 
     for m in base_modules:
         test_base_module(m)

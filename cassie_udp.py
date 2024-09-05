@@ -12,9 +12,10 @@ from testing.common import (
 )
 from util.nn_factory import load_checkpoint, nn_factory
 from util.env_factory import env_factory
-from util.quaternion import quaternion2euler
 from util.state_topic import StateTopic
 from util.tarsus_patch_wrapper import TarsusPatchWrapper
+from util.quaternion import scipy2mj, mj2scipy
+from scipy.spatial.transform import Rotation as R
 
 
 LOGSIZE = 100000
@@ -237,7 +238,7 @@ def execute(policy, env, do_log, exec_rate=1):
                 if state.radio.channel[8] < 0:
                     STO = True
                     env.robot.robot_estimator_state = state
-                    env.orient_add = quaternion2euler(env.robot.robot_estimator_state.pelvis.orientation[:])[2]
+                    env.orient_add = R.from_quat(mj2scipy(env.robot.robot_estimator_state.pelvis.orientation[:])).as_euler('xyz')[2]
                 else:
                     STO = False
                     logged = False

@@ -3,7 +3,7 @@ import torch
 import torch.nn as nn
 import math as math
 
-from nn.base import FFBase, LSTMBase, GRUBase, MixBase
+from nn.base import FFBase, LSTMBase
 
 class Actor:
     def __init__(self,
@@ -120,8 +120,8 @@ class FFActor(FFBase, Actor):
                  bounded,
                  learn_std,
                  std):
-        
-        # TODO, helei, make sure we have a actor example on what has to be included. 
+
+        # TODO, helei, make sure we have a actor example on what has to be included.
         # like the stuff below is useless to init, but has to inlcluded in order for saving checkpoint
         self.obs_dim = obs_dim
         self.action_dim = action_dim
@@ -166,115 +166,6 @@ class LSTMActor(LSTMBase, Actor):
         self.std = std
 
         LSTMBase.__init__(self, obs_dim, layers)
-        Actor.__init__(self,
-                       latent=layers[-1],
-                       action_dim=action_dim,
-                       bounded=bounded,
-                       learn_std=learn_std,
-                       std=std)
-
-        self.is_recurrent = True
-        self.init_hidden_state()
-
-    def forward(self, x, deterministic=True,
-                update_normalization_param=False, return_log_prob=False):
-        return self.actor_forward(x, deterministic=deterministic,
-                                  update_normalization_param=update_normalization_param,
-                                  return_log_prob=return_log_prob)
-
-class MixActor(MixBase, Actor):
-    """
-    A class inheriting from Mix_Base and Actor
-    which implements a recurrent + FF stochastic policy.
-    """
-    def __init__(self,
-                 obs_dim,
-                 state_dim,
-                 nonstate_dim,
-                 action_dim,
-                 lstm_layers,
-                 ff_layers,
-                 bounded,
-                 learn_std,
-                 std,
-                 nonstate_encoder_dim,
-                 nonstate_encoder_on):
-
-        self.obs_dim = obs_dim
-        self.state_dim = state_dim
-        self.nonstate_dim = nonstate_dim
-        self.action_dim = action_dim
-        self.lstm_layers = lstm_layers
-        self.ff_layers = ff_layers
-        self.bounded = bounded
-        self.learn_std = learn_std
-        self.std = std
-        self.nonstate_encoder_dim = nonstate_encoder_dim
-        self.nonstate_encoder_on = nonstate_encoder_on
-
-        MixBase.__init__(self,
-                          in_dim=obs_dim,
-                          state_dim=state_dim,
-                          nonstate_dim=nonstate_dim,
-                          lstm_layers=lstm_layers,
-                          ff_layers=ff_layers,
-                          nonstate_encoder_dim=nonstate_encoder_dim,
-                          nonstate_encoder_on=nonstate_encoder_on)
-        Actor.__init__(self,
-                       latent=ff_layers[-1],
-                       action_dim=action_dim,
-                       bounded=bounded,
-                       learn_std=learn_std,
-                       std=std)
-
-        self.is_recurrent = True
-        self.init_hidden_state()
-
-    def forward(self, x, deterministic=True,
-                update_normalization_param=False, return_log_prob=False):
-        return self.actor_forward(x, deterministic=deterministic,
-                                  update_normalization_param=update_normalization_param,
-                                  return_log_prob=return_log_prob)
-
-    def latent_space(self, x):
-        return self._latent_space_forward(x)
-
-    def load_lstm_module(self, pretrained_actor, freeze_lstm = True):
-        """Load LSTM module for Mix Actor
-
-        Args:
-            pretrained_actor: Previously trained actor
-            freeze_lstm (bool, optional): Freeze the weights/bias in LSTM. Defaults to True.
-        """
-        for param_key in pretrained_actor.state_dict():
-            if "lstm" in param_key:
-                self.state_dict()[param_key].copy_(pretrained_actor.state_dict()[param_key])
-        if freeze_lstm:
-            for name, param in self.named_parameters():
-                if "lstm" in name:
-                    param.requires_grad = False
-
-class GRUActor(GRUBase, Actor):
-    """
-    A class inheriting from GRU_Base and Actor
-    which implements a recurrent stochastic policy.
-    """
-    def __init__(self,
-                 obs_dim,
-                 action_dim,
-                 layers,
-                 bounded,
-                 learn_std,
-                 std):
-
-        self.obs_dim = obs_dim
-        self.action_dim = action_dim
-        self.layers = layers
-        self.bounded = bounded
-        self.learn_std = learn_std
-        self.std = std
-
-        GRUBase.__init__(self, obs_dim, layers)
         Actor.__init__(self,
                        latent=layers[-1],
                        action_dim=action_dim,
