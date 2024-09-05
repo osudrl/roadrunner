@@ -9,11 +9,14 @@ from .mujoco_render import MujocoRender
 from util.colors import FAIL, WARNING, ENDC
 from sim.util.geom import Geom
 from sim.util.hfield import Hfield
-from util.quaternion import quaternion2euler, euler2quat
+from util.quaternion import scipy2mj, mj2scipy
 from util.camera_util import (
     make_pose, pose_inv, transform_from_pixels_to_world,
     transform_from_pixels_to_camera_frame
 )
+from scipy.spatial.transform import Rotation as R
+
+
 class MujocoSim(GenericSim):
     """
     A base class to define general useful functions that interact with Mujoco simulator.
@@ -365,10 +368,9 @@ class MujocoSim(GenericSim):
         heightmap_num_points = grid_unrotated.shape[0]
         # Rotate the heightmap to base heading, offset to base position, and offset to hfield center
         gridxy_rotated = np.zeros((heightmap_num_points, 3))
-        # TODO: helei, change this to vectorized version
-        q = euler2quat(z=quaternion2euler(self.get_base_orientation())[2], y=0, x=0)
-        for i in range(heightmap_num_points):
-            mj.mju_rotVecQuat(gridxy_rotated[i], grid_unrotated[i], q)
+        yaw = R.from_quat(mj2scipy(self.get_base_orientation())).as_euler('zyx')[0]
+        r = R.from_euler('z', yaw)
+        gridxy_rotated = r.apply(grid_unrotated)
         gridxy_rotated += self.get_base_position()
         gridxy_rotated_global = gridxy_rotated + self.hfield_radius_x
         # Conver into global pixel space to get the local heightmap

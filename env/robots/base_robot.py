@@ -3,8 +3,7 @@ import copy
 
 import numpy as np
 from scipy.spatial.transform import Rotation as R
-
-from util.quaternion import *
+from util.quaternion import mj2scipy, scipy2mj
 
 
 class BaseRobot(ABC):

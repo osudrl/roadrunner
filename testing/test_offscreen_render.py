@@ -19,7 +19,7 @@ def test_offscreen_rendering():
     import numpy as np
     import matplotlib.pyplot as plt
     import mediapy
-    from sim import MjCassieSim
+    from sim.cassie_sim.mj_cassiesim import MjCassieSim
     from util.camera_util import crop_from_center
     import cv2
 
@@ -131,7 +131,7 @@ def test_pointcloud_rendering():
 	os.environ['MUJOCO_GL']=gl_option
 
 	import time
-	from sim import MjCassieSim
+    from sim.cassie_sim.mj_cassiesim import MjCassieSim
 	import cv2
 
 	# Check if the env variable is correct

@@ -1,8 +1,8 @@
 import argparse
 import torch
 
-from nn.critic import FFCritic, LSTMCritic, GRUCritic
-from nn.actor import FFActor, LSTMActor, GRUActor, MixActor
+from nn.critic import FFCritic, LSTMCritic
+from nn.actor import FFActor, LSTMActor
 from types import SimpleNamespace
 from util.colors import FAIL, WARNING, ENDC
 
@@ -13,7 +13,7 @@ def nn_factory(args, env=None):
 
     Args:
         args (Namespace): Arguments for model class init.
-        env (Env object, optional): Env object to get any env-relevant info to 
+        env (Env object, optional): Env object to get any env-relevant info to
             initialize modules. Defaults to None.
 
     Returns: actor and critic
@@ -37,14 +37,6 @@ def nn_factory(args, env=None):
                             layers=layers,
                             learn_std=args.learn_stddev)
         critic = LSTMCritic(args.obs_dim, layers=layers)
-    elif args.arch == 'gru':
-        policy = GRUActor(args.obs_dim,
-                        args.action_dim,
-                        std=std,
-                        bounded=args.bounded,
-                        layers=layers,
-                        learn_std=args.learn_stddev)
-        critic = GRUCritic(args.obs_dim, layers=layers)
     elif args.arch == 'ff':
         policy = FFActor(args.obs_dim,
                         args.action_dim,
@@ -54,19 +46,6 @@ def nn_factory(args, env=None):
                         learn_std=args.learn_stddev,
                         nonlinearity=args.nonlinearity)
         critic = FFCritic(args.obs_dim, layers=layers)
-    elif args.arch == 'mix':
-        policy = MixActor(obs_dim=args.obs_dim,
-                          state_dim=env.keywords['state_dim'],
-                          nonstate_dim=env.keywords['nonstate_dim'],
-                          action_dim=args.action_dim,
-                          lstm_layers=layers,
-                          ff_layers=layers,
-                          bounded=args.bounded,
-                          learn_std=args.learn_stddev,
-                          std=std,
-                          nonstate_encoder_dim=args.nonstate_encoder_dim,
-                          nonstate_encoder_on=args.nonstate_encoder_on)
-        critic = LSTMCritic(input_dim=args.obs_dim, layers=layers)
     else:
         raise RuntimeError(f"Arch {args.arch} is not included, check the entry point.")
 

@@ -8,7 +8,8 @@ import numpy as np
 from threading import Lock
 from multiprocessing import Process
 from util.colors import FAIL, WARNING, ENDC
-from util.quaternion import euler2so3
+from scipy.spatial.transform import Rotation as R
+
 """
 Class to handle visualization of generic Mujoco models. Adapted from cassie-mujoco-sim
 (https://github.com/osudrl/cassie-mujoco-sim) and mujoco-python-viewer
@@ -748,7 +749,7 @@ class MujocoViewer():
             This function assumes the simulation viewer has an add_marker and an update_marker_position method.
         """
         # Define the rotation, size, and color of the point markers
-        so3 = euler2so3(z=0, x=0, y=0)
+        so3 = R.from_euler("xyz", [0, 0, 0]).as_matrix()
         size = [0.015, 0.015, 0.015]
         color = [1, 0, 0]
         rgba = np.concatenate((color, np.ones(1)))

@@ -1,5 +1,6 @@
 import numpy as np
-from util.quaternion import euler2quat
+from util.quaternion import mj2scipy, scipy2mj
+from scipy.spatial.transform import Rotation as R
 
 class Geom:
     def __init__(self, sim):
@@ -44,7 +45,7 @@ class Geom:
 
         if randomize_slope:
             geom_plane = [np.random.uniform(*self.roll_noise), np.random.uniform(*self.pitch_noise), 0]
-            quat_plane   = euler2quat(z=geom_plane[2], y=geom_plane[1], x=geom_plane[0])
+            quat_plane = scipy2mj(R.as_euler('xyz', geom_plane))
             self.sim.set_geom_pose(box, [x, start_y, vert_pos, *quat_plane])
 
         return x + stair_length/2, z + stair_rise

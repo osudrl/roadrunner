@@ -2,7 +2,8 @@ import numpy as np
 
 from types import SimpleNamespace
 from env.robots.base_robot import BaseRobot
-from sim import MjCassieSim, LibCassieSim
+from sim.cassie_sim.mj_cassiesim import MjCassieSim
+from sim.cassie_sim.lib_cassiesim import LibCassieSim
 from sim.cassie_sim.cassiemujoco import state_out_t
 
 

@@ -2,7 +2,7 @@ import numpy as np
 
 from env.robots.base_robot import BaseRobot
 from util.colors import FAIL, WARNING, ENDC
-from sim import MjDigitSim
+from sim.digit_sim import MjDigitSim
 from testing.common import DIGIT_JOINT_LLAPI2MJ_INDEX, DIGIT_MOTOR_LLAPI2MJ_INDEX
 
 

@@ -2,12 +2,10 @@ import mujoco as mj
 import numpy as np
 import time
 
-from sim import (
-    MjCassieSim,
-    LibCassieSim,
-    MjDigitSim,
-    MujocoViewer,
-)
+from sim.cassie_sim.lib_cassiesim import LibCassieSim
+from sim.cassie_sim.mj_cassiesim import MjCassieSim
+from sim.digit_sim.mj_digitsim import MjDigitSim
+from sim.mujoco_viewer import MujocoViewer
 
 from .common import (
     DIGIT_MOTOR_NAME,
@@ -17,7 +15,8 @@ from .common import (
 )
 
 from util.colors import FAIL, ENDC, OKGREEN
-from util.quaternion import quaternion2euler, euler2so3
+from util.quaternion import mj2scipy, scipy2mj
+from scipy.spatial.transform import Rotation as R
 
 def test_all_sim():
     sim_list = [LibCassieSim, MjCassieSim, MjDigitSim]
@@ -94,7 +93,7 @@ def test_sim_viewer_marker(sim):
     test_sim.reset()
     test_sim.viewer_init()
     render_state = test_sim.viewer_render()
-    so3 = euler2so3(z=0, x=0, y=0)
+    so3 = R.from_euler('xyz', [0, 0.4, 0.3]).as_matrix()
     test_sim.viewer.add_marker("sphere", "foo", [1, 0, 1], [0.1, 0.1, 0.1], [0.8, 0.1, 0.1, 1.0], so3)
     test_sim.viewer.add_marker("sphere", "foo2", [1, 0, 1.3], [0.1, 0.1, 0.1], [0.1, 0.8, 0.1, 1.0], so3)
     count = 0
@@ -110,10 +109,10 @@ def test_sim_viewer_marker(sim):
                 test_sim.viewer.update_marker_position(0, [0.5, 0, 1])
                 test_sim.viewer.update_marker_size(0, [0.05, 0.01, 0.1])
                 test_sim.viewer.update_marker_rgba(0, [0.1, 0.1, 0.8, 1.0])
-                so3 = euler2so3(z=0, x=0.4, y=0.3)
+                so3 = R.from_euler('xyz', [0.4, 0.3, 0.0]).as_matrix()
                 test_sim.viewer.update_marker_so3(0, so3)
                 test_sim.viewer.remove_marker(1)
-                so3 = euler2so3(z=0, x=0, y=0)
+                so3 = R.from_euler('xyz', [0, 0, 0]).as_matrix()
                 test_sim.viewer.add_marker("capsule", "foo3", [1, 0, 1.3], [0.1, 0.1, 0.6], [0.1, 0.8, 0.1, 1.0], so3)
                 test_sim.viewer.add_marker("arrow", "arrow", [0.7, -0.2, 1.0], [0.03, 0.03, 0.7], [0.1, 0.1, 0.8, 1.0], so3)
                 print("Marker changes done, you can quit the window now")
@@ -387,9 +386,9 @@ def test_sim_relative_pose(sim):
     p3 = test_sim.get_site_pose(name=test_sim.feet_site_name[1])
     lfoot_in_base = test_sim.get_relative_pose(p1, p2)
     rfoot_in_base = test_sim.get_relative_pose(p1, p3)
-    lfoot_euler = quaternion2euler(lfoot_in_base[3:7])/np.pi*180
-    rfoot_euler = quaternion2euler(rfoot_in_base[3:7])/np.pi*180
-    x_target_euler = quaternion2euler(x_target[3:7])/np.pi*180
+    lfoot_euler = R.from_quat(mj2scipy(lfoot_in_base[3:7])).as_euler('xyz', degrees=True)
+    rfoot_euler = R.from_quat(mj2scipy(rfoot_in_base[3:7])).as_euler('xyz', degrees=True)
+    x_target_euler = R.from_quat(mj2scipy(x_target[3:7])).as_euler('xyz', degrees=True)
     assert lfoot_euler[1] + x_target_euler[1] < 1e-1 , "get_relative_pose returns wrong lfoot angles."
     assert rfoot_euler[1] + x_target_euler[1] < 1e-1 , "get_relative_pose returns wrong rfoot angles."
 

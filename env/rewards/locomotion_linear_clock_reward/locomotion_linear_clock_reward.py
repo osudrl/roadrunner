@@ -4,7 +4,8 @@ from scipy.spatial.transform import Rotation as R
 
 from env.tasks.locomotionclockenv.locomotionclockenv import LocomotionClockEnv
 from util.colors import FAIL, ENDC
-from util.quaternion import quaternion_distance, euler2quat, mj2scipy, scipy2mj
+from util.quaternion import quaternion_distance, mj2scipy, scipy2mj
+from scipy.spatial.transform import Rotation as R
 
 
 def compute_rewards(self: LocomotionClockEnv, action):
@@ -59,7 +60,7 @@ def compute_rewards(self: LocomotionClockEnv, action):
     base_vel = self.sim.get_base_linear_velocity()
     # Offset velocity in local frame by target orient_add to get target velocity in world frame
     target_vel_in_local = np.array([self.x_velocity, self.y_velocity, 0])
-    quat = euler2quat(z = self.orient_add, y = 0, x = 0)
+    quat = scipy2mj(R.from_euler('xyz', [0,0,self.orient_add]).as_quat())
     target_vel = np.zeros(3)
     mj.mju_rotVecQuat(target_vel, target_vel_in_local, quat)
     # Compare velocity in the same frame
