@@ -1,0 +1,2 @@
+# Testing
+All of our test files are contained here. These are mostly used for CI and to test and maintain functionality of everything as we develop. Analysis and performance testing scripts will go here in the future as well.
