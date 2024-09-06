@@ -2,7 +2,8 @@ import numpy as np
 
 from env.robots.base_robot import BaseRobot
 from util.colors import FAIL, WARNING, ENDC
-from sim.digit_sim import MjDigitSim
+from sim.digit_sim.ar_digitsim import ArDigitSim
+from sim.digit_sim.mj_digitsim import MjDigitSim
 from testing.common import DIGIT_JOINT_LLAPI2MJ_INDEX, DIGIT_MOTOR_LLAPI2MJ_INDEX
 
 
@@ -94,9 +95,12 @@ class Digit(BaseRobot):
             fast = True
         if simulator_type == "mujoco":
             self._sim = MjDigitSim(terrain=terrain, fast=fast)
+        elif simulator_type == 'ar_async':
+            self.llapi_obs = None
+            self._sim = MjDigitSim(terrain=terrain)
         else:
             raise RuntimeError(f"{FAIL}Simulator type {simulator_type} not correct!"
-                               "Select from 'mujoco'.{ENDC}")
+                               "Select from 'mujoco' or 'ar_async'.{ENDC}")
 
     def get_raw_robot_state(self):
         states = {}
