@@ -1,1 +1,0 @@
-from .mj_digitsim import MjDigitSim

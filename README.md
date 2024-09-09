@@ -61,6 +61,11 @@ to visualize and run a Cassie walking policy. Terminal printout will show a lege
 ## Cassie Asynchronous Sim/Hardware Evaluation Instructions
 To run Cassie policies in the asynchronous simulator or on the hardware, use the `cassie_udp.py` script. It simply takes in arguments of the policy path along with whether to do logging or not (logging is on by default). Note that you need to [cassie-mujoco-sim](https://github.com/osudrl/cassie-mujoco-sim) to run the async simulator. Once setup, run `./cassiesim -vxr` in the example directory as a separate process. This will open a visualization window, and you can then run `cassie_udp.py` and it should automatically connect to the cassiesim process.
 
+## Digit AR-Control/Hardware Evaluation Instructions
+To run Digit policies in asynchronous ar-control or on the hardware, use the `digit_udp.py` script. It simply takes in arguments of the policy path along with whether to do logging or not (logging is on by default). Note that the script assumes that you have the `ar-software-2023.01.13a` directory in your home directory. If it is not there, it will assume that you have already started ar-control manually. Otherwise assuming that everything is in the right place, the script will launch ar-control for you, and you can goto `localhost:8080/gamepad` in your web browser to view the visualization. The script uses the same setup for keyboard control as the sim interactive control (see the `env` [readme](env/readme.md#L77)). There is also an additional key command automatically added: the "m" key will toggle the control mode of Digit. By default Digit will start out using the Agility controller. Hitting the "m" key will switch to your policy and you can toggle back and forth as you wish.
+
+Currently only policy inputs, outputs, time, and `orient_add` are logged. For now if you want to add logging of your own values, add an array/dictionary to the `log_data` dictionary in the `run` function. Initialize it with `LOGSIZE` entries (basically want to allocate memory of the list only once), and then write your data to `log_data` in [`run`](./digit_udp.py#L207). An easier way to add custom logs may come later.
+
 ## Structure Overview
 
 The repo is split into 6 main folders. Each contains it's own readme with further documentation.

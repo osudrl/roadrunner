@@ -2,7 +2,8 @@ import numpy as np
 
 from env.robots.base_robot import BaseRobot
 from util.colors import FAIL, WARNING, ENDC
-from sim.digit_sim import MjDigitSim
+from sim.digit_sim.ar_digitsim import ArDigitSim
+from sim.digit_sim.mj_digitsim import MjDigitSim
 from testing.common import DIGIT_JOINT_LLAPI2MJ_INDEX, DIGIT_MOTOR_LLAPI2MJ_INDEX
 
 
@@ -94,17 +95,33 @@ class Digit(BaseRobot):
             fast = True
         if simulator_type == "mujoco":
             self._sim = MjDigitSim(terrain=terrain, fast=fast)
+        elif simulator_type == 'ar_async':
+            self.llapi_obs = None
+            self._sim = MjDigitSim(terrain=terrain)
         else:
             raise RuntimeError(f"{FAIL}Simulator type {simulator_type} not correct!"
-                               "Select from 'mujoco'.{ENDC}")
+                               "Select from 'mujoco' or 'ar_async'.{ENDC}")
 
     def get_raw_robot_state(self):
         states = {}
-        # NOTE: do not use floating base angular velocity and it's bad on hardware
-        states['base_orient'] = self.sim.get_base_orientation()
-        states['base_ang_vel'] = self.sim.data.sensor('torso/base/imu-gyro').data
-        states['motor_pos'] = self.sim.get_motor_position()
-        states['motor_vel'] = self.sim.get_motor_velocity()
-        states['joint_pos'] = self.sim.get_joint_position()
-        states['joint_vel'] = self.sim.get_joint_velocity()
+        if self.simulator_type == "ar_async":
+            if self.llapi_obs is None:
+                print(f"{WARNING}WARNING: llapi_obs is None, can not get robot state.{ENDC}")
+                return False
+            else:
+                states['base_orient'] = np.array([self.llapi_obs.base.orientation.w, self.llapi_obs.base.orientation.x,
+                                                  self.llapi_obs.base.orientation.y, self.llapi_obs.base.orientation.z])
+                states['base_ang_vel'] = np.array(self.llapi_obs.imu.angular_velocity[:])
+                states['motor_pos'] = np.array(self.llapi_obs.motor.position[:])[DIGIT_MOTOR_LLAPI2MJ_INDEX]
+                states['motor_vel'] = np.array(self.llapi_obs.motor.velocity[:])[DIGIT_MOTOR_LLAPI2MJ_INDEX]
+                states['joint_pos'] = np.array(self.llapi_obs.joint.position[:])[DIGIT_JOINT_LLAPI2MJ_INDEX]
+                states['joint_vel'] = np.array(self.llapi_obs.joint.velocity[:])[DIGIT_JOINT_LLAPI2MJ_INDEX]
+        else:
+            # NOTE: do not use floating base angular velocity and it's bad on hardware
+            states['base_orient'] = self.sim.get_base_orientation()
+            states['base_ang_vel'] = self.sim.data.sensor('torso/base/imu-gyro').data
+            states['motor_pos'] = self.sim.get_motor_position()
+            states['motor_vel'] = self.sim.get_motor_velocity()
+            states['joint_pos'] = self.sim.get_joint_position()
+            states['joint_vel'] = self.sim.get_joint_velocity()
         return states
