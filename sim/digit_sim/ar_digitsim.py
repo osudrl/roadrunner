@@ -32,7 +32,7 @@ class ArDigitSim:
                  args,
                  path_to_ar_control: str,
                  address: str = '127.0.0.1',
-                 port: int = 8081,
+                 port: int = 8080,
                  connect_timeout: float = 1.0):
         # Initialize simulator and ar-control stack
         self.sim = agility.Simulator(path_to_ar_control, *args, auto_port=True)
