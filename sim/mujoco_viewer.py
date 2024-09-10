@@ -722,10 +722,9 @@ class MujocoViewer():
             self.scn.geoms[self.scn.ngeom].objtype = mj.mjtObj.mjOBJ_UNKNOWN
             self.scn.geoms[self.scn.ngeom].objid = -1
             self.scn.geoms[self.scn.ngeom].category = mj.mjtCatBit.mjCAT_DECOR
-            self.scn.geoms[self.scn.ngeom].texid = -1
-            self.scn.geoms[self.scn.ngeom].texuniform = 0
-            self.scn.geoms[self.scn.ngeom].texrepeat[0] = 1
-            self.scn.geoms[self.scn.ngeom].texrepeat[1] = 1
+            self.scn.geoms[self.scn.ngeom].matid = -1
+            self.scn.geoms[self.scn.ngeom].texcoord = 0
+            self.scn.geoms[self.scn.ngeom].segid = self.scn.ngeom
             self.scn.geoms[self.scn.ngeom].emission = 0
             self.scn.geoms[self.scn.ngeom].specular = 0.5
             self.scn.geoms[self.scn.ngeom].shininess = 0.5

@@ -123,64 +123,66 @@ def test_offscreen_rendering():
 """
 def test_pointcloud_rendering():
 
-	OFFSCREEN = 0
-	gl_option = 'egl' if OFFSCREEN else 'glx'
+    OFFSCREEN = 0
+    gl_option = 'egl' if OFFSCREEN else 'glx'
 
-	# Need to update env variable before import mujoco
-	import os
-	os.environ['MUJOCO_GL']=gl_option
+    # Need to update env variable before import mujoco
+    import os
+    os.environ['MUJOCO_GL']=gl_option
 
-	import time
+    import time
     from sim.cassie_sim.mj_cassiesim import MjCassieSim
-	import cv2
+    import cv2
 
-	# Check if the env variable is correct
-	if "MUJOCO_GL" in os.environ:
-		assert os.getenv('MUJOCO_GL') == gl_option,\
-			   f"GL option is {os.getenv('MUJOCO_GL')} but want to load {gl_option}."
-		print("PYOPENGL_PLATFORM =",os.getenv('PYOPENGL_PLATFORM'))
+    # Check if the env variable is correct
+    if "MUJOCO_GL" in os.environ:
+        assert os.getenv('MUJOCO_GL') == gl_option,\
+               f"GL option is {os.getenv('MUJOCO_GL')} but want to load {gl_option}."
+        print("PYOPENGL_PLATFORM =",os.getenv('PYOPENGL_PLATFORM'))
 
-	camera_name = "forward-chest-realsense-d435/depth/image-rect"
-	size = [[420, 240]]
-	for s in size:
-		# Init mujoc sim and optional viewer to verify
-		sim = MjCassieSim(fast=False)
-		sim.reset()
-		sim.geom_generator._create_geom('box0', *[1, 0, 0], rise=0.3, length=0.3, width=0.3)
-		sim.adjust_robot_pose()
-		if OFFSCREEN:
-			# Init renderer that reads the same model/data
-			sim.init_renderer(width=s, height=s, offscreen=OFFSCREEN)
-			render_state = True
-		else:
-			sim.viewer_init(height=1024, width=960)
-			render_state = sim.viewer_render()
-			# Create a second viewer that renderes a different view
-			sim.init_renderer(width=s[0], height=s[1], offscreen=OFFSCREEN)
+    camera_name = "forward-chest-realsense-d435/depth/image-rect"
+    size = [[420, 240]]
+    for s in size:
+        # Init mujoc sim and optional viewer to verify
+        sim = MjCassieSim(fast=False)
+        sim.reset()
+        sim.geom_generator._create_geom('box0', *[1, 0, 0], rise=0.3, length=0.3, width=0.3)
+        sim.adjust_robot_pose()
+        if OFFSCREEN:
+            # Init renderer that reads the same model/data
+            sim.init_renderer(width=s, height=s, offscreen=OFFSCREEN)
+            render_state = True
+        else:
+            sim.viewer_init(height=1024, width=960)
+            render_state = sim.viewer_render()
+            # Create a second viewer that renderes a different view
+            sim.init_renderer(width=s[0], height=s[1], offscreen=OFFSCREEN)
 
-		while render_state:
-			paused = False if OFFSCREEN else sim.viewer_paused()
-			if not paused:
-				for _ in range(50):
-					sim.sim_forward()
-			if not OFFSCREEN:
-				render_state = sim.viewer_render()
-			depth = sim.get_render_image(camera_name)
+        while render_state:
+            paused = False if OFFSCREEN else sim.viewer_paused()
+            if not paused:
+                for _ in range(50):
+                    sim.sim_forward()
+            if not OFFSCREEN:
+                render_state = sim.viewer_render()
+            depth = sim.get_render_image(camera_name)
+            if type(depth) == bool and not depth:
+                break
 
-			start_time = time.time()
-			pcl = sim.get_point_cloud(camera_name, depth, 10)
-			# pcl = sim.get_point_cloud_in_camera_frame(camera_name, depth, 10)
-			end_time = time.time()
-			print("GET POINTCLOUD: ", end_time - start_time)
-			start_render = time.time()
-			sim.viewer.render_point_cloud(pcl)
-			end_render = time.time()
-			print("PC RENDER TIME: ", end_render - start_render)
+            start_time = time.time()
+            pcl = sim.get_point_cloud(camera_name, depth, 10)
+            # pcl = sim.get_point_cloud_in_camera_frame(camera_name, depth, 10)
+            end_time = time.time()
+            print("GET POINTCLOUD: ", end_time - start_time)
+            start_render = time.time()
+            sim.viewer.render_point_cloud(pcl)
+            end_render = time.time()
+            print("PC RENDER TIME: ", end_render - start_render)
 
-			cv2.namedWindow("Depth", cv2.WINDOW_AUTOSIZE)
-			cv2.imshow("Depth", depth)
-			cv2.waitKey(1)
-			if cv2.waitKey(1) & 0xFF == ord('q'):
-				break
+            cv2.namedWindow("Depth", cv2.WINDOW_AUTOSIZE)
+            cv2.imshow("Depth", depth)
+            cv2.waitKey(1)
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
 
-	print("Passed ONSCREEN pointcloud rendering test!")
+    print("Passed ONSCREEN pointcloud rendering test!")

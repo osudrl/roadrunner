@@ -4,9 +4,9 @@ import numpy as np
 import os
 import psutil
 import ray
-import wandb
 import torch
 import torch.optim as optim
+import wandb
 
 from copy import deepcopy
 from time import time, monotonic

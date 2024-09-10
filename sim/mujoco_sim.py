@@ -255,7 +255,7 @@ class MujocoSim(GenericSim):
         else:
             self.renderer = MujocoRender(self.model, height=height, width=width)
 
-    def get_render_image(self, camera_name: str, type: str = 'depth'):
+    def get_render_image(self, camera_name: str, render_type: str = 'depth'):
         """ Get render image (depth or rgb) given camera name and type.
         To use offscreen rendering, first call init_offscreen_renderer() at reset().
         And then call this function.
@@ -265,22 +265,24 @@ class MujocoSim(GenericSim):
         if camera_name is None:
             raise RuntimeError("Specify a camera name.")
 
-        if type == 'depth':
+        if render_type == 'depth':
             self.renderer.enable_depth_rendering()
             self.renderer.update_scene(self.data, camera=camera_name)
             depth = copy.deepcopy(self.renderer.render())
-            assert depth.shape == (self.renderer._height, self.renderer._width), \
-                f"Depth image shape {depth.shape} does not match " \
-                f"renderer shape {(self.renderer._height, self.renderer._width)}."
+            if type(depth) != bool:
+                assert depth.shape == (self.renderer._height, self.renderer._width), \
+                    f"Depth image shape {depth.shape} does not match " \
+                    f"renderer shape {(self.renderer._height, self.renderer._width)}."
             return depth
-        elif type == 'rgb':
+        elif render_type == 'rgb':
             self.renderer.disable_depth_rendering()
             self.renderer.disable_segmentation_rendering()
             self.renderer.update_scene(self.data, camera=camera_name)
             rgb = copy.deepcopy(self.renderer.render())
-            assert rgb.shape == (self.renderer._height, self.renderer._width, 3), \
-                f"RGB image shape {rgb.shape} does not match " \
-                f"renderer shape {(self.renderer._height, self.renderer._width), 3}."
+            if type(rgb) != bool:
+                assert rgb.shape == (self.renderer._height, self.renderer._width, 3), \
+                    f"RGB image shape {rgb.shape} does not match " \
+                    f"renderer shape {(self.renderer._height, self.renderer._width), 3}."
             return rgb
         else:
             raise ValueError("Invalid type specified. Choose 'depth' or 'rgb'.")
