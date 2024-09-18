@@ -1,0 +1,12 @@
+# Add robot model to simulation in a face-down pose
+[[model-list]]
+model = "robot"
+pose = {rpyxyz = [0.0, 1.571, 0.0, 0.0, 0.0, 0.15]}
+fixed = false
+
+# Set initial mode of the robot
+[simulator.robot]
+initial-configuration = "laying-down"
+
+[planning]
+initial-operation-mode = "disabled"

@@ -1,0 +1,63 @@
+[lowlevelapi]
+enable = true
+# Time in seconds between Low-level API packets before control program
+# disables robot
+timeout = 0.05
+# Port for incoming and outgoing Low-level API communications.
+# Change if these settings interfere with any other programs or network
+# Traffic on the payload computer. Must match settings in lowlevelapi.c
+# (lines 181 and 183). These should not be changed under normal operation
+listen-port = 25500
+send-port = 25501
+
+[simulator]
+# Uncomment this for better visualization, but it will cause some state estimate features to be disabled (e.g. foot contact reporting)
+# robot-base-observed = true
+free-run = true
+
+# Add robot to simulation fixed above the ground
+[[model-list]]
+model = "robot"
+# pose = {rpyxyz = [0, 0, 3.14, 0, 0, 1]}
+pose = {rpyxyz = [0, 0, 0, 0, 0, 1]}
+
+[logging]
+enable-cyclic-logs = true
+enable-event-log = true
+enable-summary-log = true
+enable-visualizer-log = true
+log-directory = "/tmp/control"
+summary-log-directory = "/tmp/summary"
+
+[planning]
+# Draw the current top-level action status as text above the robot
+draw-status = false
+
+[mujoco.default]
+friction = [0.7, 0.01, 0.005]
+
+[mujoco.default.geom]
+contype = 0
+conaffinity = 0
+condim = 1
+# Note: Higher stiffness (first value) has caused collision instabilities in
+# the past. See https://mujoco.readthedocs.io/en/stable/modeling.html#solver-parameters
+solref = [0.01, 1.0]
+
+[mujoco.size]
+nconmax = -1 # Maximum number of active contacts
+
+[mujoco.default.equality]
+solref = [0.001, 1.1]
+solimp = [0.9, 0.95, 0.001, 0.1, 2]
+
+[mujoco.default.joint]
+solreflimit = [0.001, 1.0]
+
+[mujoco.ground]
+pos = [0.0, 0.0, 0.0]
+condim = 3
+conaffinity = 127
+friction = [0.7, 0.01, 0.005]
+priority = 100
+friction-randomization = [1.0, 1.0]

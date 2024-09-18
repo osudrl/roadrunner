@@ -1,0 +1,34 @@
+{
+    "height_penalty": {
+        "weighting": 0.3,
+        "scaling": 3.0
+    },
+    "base_orientation": {
+        "weighting": 0.1,
+        "scaling": 30
+    },
+    "l_foot_orientation": {
+        "weighting": 0.05,
+        "scaling": 20
+    },
+    "r_foot_orientation": {
+        "weighting": 0.05,
+        "scaling": 20
+    },
+    "foot_vel_penalty": {
+        "weighting": 0.2,
+        "scaling": 2.0
+    },
+    "motor_vel_penalty": {
+        "weighting": 0.1,
+        "scaling": 0.2
+    },
+    "ctrl_penalty": {
+        "weighting": 0.1,
+        "scaling": 5.0
+    },
+    "trq_penalty": {
+        "weighting": 0.1,
+        "scaling": 0.05
+    }
+}

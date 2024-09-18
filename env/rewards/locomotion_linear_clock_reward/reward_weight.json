@@ -1,0 +1,58 @@
+{
+    "x_vel": {
+        "weighting": 0.1,
+        "scaling": 2.0
+    },
+    "y_vel": {
+        "weighting": 0.1,
+        "scaling": 2.0
+    },
+    "base_orientation": {
+        "weighting": 0.1,
+        "scaling": 30
+    },
+    "l_foot_cost_forcevel": {
+        "weighting": 0.1,
+        "scaling": 1.0
+    },
+    "r_foot_cost_forcevel": {
+        "weighting": 0.1,
+        "scaling": 1.0
+    },
+    "l_foot_cost_pos": {
+        "weighting": 0.1,
+        "scaling": 40
+    },
+    "r_foot_cost_pos": {
+        "weighting": 0.1,
+        "scaling": 40
+    },
+    "l_foot_orientation": {
+        "weighting": 0.025,
+        "scaling": 20
+    },
+    "r_foot_orientation": {
+        "weighting": 0.025,
+        "scaling": 20
+    },
+    "action_penalty": {
+        "weighting": 0.1,
+        "scaling": 1.0
+    },
+    "base_transacc": {
+        "weighting": 0.025,
+        "scaling": 1.0
+    },
+    "base_rotvel": {
+        "weighting": 0.025,
+        "scaling": 2.0
+    },
+    "ctrl_penalty": {
+        "weighting": 0.05,
+        "scaling": 8.0
+    },
+    "trq_penalty": {
+        "weighting": 0.05,
+        "scaling": 0.075
+    }
+}

@@ -1,0 +1,58 @@
+{
+    "x_vel": {
+        "weighting": 0.15,
+        "scaling": 2.0
+    },
+    "y_vel": {
+        "weighting": 0.1,
+        "scaling": 2.0
+    },
+    "orientation": {
+        "weighting": 0.15,
+        "scaling": 30
+    },
+    "left_force": {
+        "weighting": 0.1,
+        "scaling": 0.01
+    },
+    "right_force": {
+        "weighting": 0.1,
+        "scaling": 0.01
+    },
+    "left_speed": {
+        "weighting": 0.1,
+        "scaling": 1
+    },
+    "right_speed": {
+        "weighting": 0.1,
+        "scaling": 1
+    },
+    "stable_base": {
+        "weighting": 0.1,
+        "scaling": 0.01
+    },
+    "action_penalty": {
+        "weighting": 0.0,
+        "scaling": 0.5
+    },
+    "ctrl_penalty": {
+        "weighting": 0.1,
+        "scaling": 8.0
+    },
+    "trq_penalty": {
+        "weighting": 0.05,
+        "scaling": 1.0
+    },
+    "arm": {
+        "weighting": 0.02,
+        "scaling": 1.0
+    },
+    "feet_accel": {
+        "weighting": 0.05,
+        "scaling": 0.02
+    },
+    "contact_patch": {
+        "weighting": 0.0,
+        "scaling": 10
+    }
+}

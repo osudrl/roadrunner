@@ -1,0 +1,386 @@
+n_traj: 1000
+benchmarks:
+- idx: 0
+  name: commandability for 2 cassie in rectangle at x=0, y=0, t=0, h=0.75, force=0,
+    policy=trained_2_torque_joint_force_randomize_weight
+  env:
+    num_cassie: 2
+    terrain: cassiepede_centralized
+    time_horizon: 1000
+    policy: trained_2_torque_joint_force_randomize_weight
+    checkpoint: '94783'
+    run_name: '2024-05-19 00:56:18.180209'
+    force: 0
+  command:
+    x: 0
+    y: 0
+    t: 0
+    h: 0.75
+- idx: 1
+  name: commandability for 2 cassie in rectangle at x=1, y=0, t=0, h=0.75, force=0,
+    policy=trained_2_torque_joint_force_randomize_weight
+  env:
+    num_cassie: 2
+    terrain: cassiepede_centralized
+    time_horizon: 1000
+    policy: trained_2_torque_joint_force_randomize_weight
+    checkpoint: '94783'
+    run_name: '2024-05-19 00:56:18.180209'
+    force: 0
+  command:
+    x: 1
+    y: 0
+    t: 0
+    h: 0.75
+- idx: 2
+  name: commandability for 2 cassie in rectangle at x=0, y=0.25, t=0, h=0.75, force=0,
+    policy=trained_2_torque_joint_force_randomize_weight
+  env:
+    num_cassie: 2
+    terrain: cassiepede_centralized
+    time_horizon: 1000
+    policy: trained_2_torque_joint_force_randomize_weight
+    checkpoint: '94783'
+    run_name: '2024-05-19 00:56:18.180209'
+    force: 0
+  command:
+    x: 0
+    y: 0.25
+    t: 0
+    h: 0.75
+- idx: 3
+  name: commandability for 2 cassie in rectangle at x=0, y=0, t=15, h=0.75, force=0,
+    policy=trained_2_torque_joint_force_randomize_weight
+  env:
+    num_cassie: 2
+    terrain: cassiepede_centralized
+    time_horizon: 1000
+    policy: trained_2_torque_joint_force_randomize_weight
+    checkpoint: '94783'
+    run_name: '2024-05-19 00:56:18.180209'
+    force: 0
+  command:
+    x: 0
+    y: 0
+    t: 15
+    h: 0.75
+- idx: 4
+  name: commandability for 2 cassie in rectangle at x=0, y=0, t=0, h=0.75, force=20,
+    policy=trained_2_torque_joint_force_randomize_weight
+  env:
+    num_cassie: 2
+    terrain: cassiepede_centralized
+    time_horizon: 1000
+    policy: trained_2_torque_joint_force_randomize_weight
+    checkpoint: '94783'
+    run_name: '2024-05-19 00:56:18.180209'
+    force: 20
+  command:
+    x: 0
+    y: 0
+    t: 0
+    h: 0.75
+- idx: 5
+  name: commandability for 2 cassie in rectangle at x=1, y=0, t=0, h=0.75, force=20,
+    policy=trained_2_torque_joint_force_randomize_weight
+  env:
+    num_cassie: 2
+    terrain: cassiepede_centralized
+    time_horizon: 1000
+    policy: trained_2_torque_joint_force_randomize_weight
+    checkpoint: '94783'
+    run_name: '2024-05-19 00:56:18.180209'
+    force: 20
+  command:
+    x: 1
+    y: 0
+    t: 0
+    h: 0.75
+- idx: 6
+  name: commandability for 2 cassie in rectangle at x=0, y=0.25, t=0, h=0.75, force=20,
+    policy=trained_2_torque_joint_force_randomize_weight
+  env:
+    num_cassie: 2
+    terrain: cassiepede_centralized
+    time_horizon: 1000
+    policy: trained_2_torque_joint_force_randomize_weight
+    checkpoint: '94783'
+    run_name: '2024-05-19 00:56:18.180209'
+    force: 20
+  command:
+    x: 0
+    y: 0.25
+    t: 0
+    h: 0.75
+- idx: 7
+  name: commandability for 2 cassie in rectangle at x=0, y=0, t=15, h=0.75, force=20,
+    policy=trained_2_torque_joint_force_randomize_weight
+  env:
+    num_cassie: 2
+    terrain: cassiepede_centralized
+    time_horizon: 1000
+    policy: trained_2_torque_joint_force_randomize_weight
+    checkpoint: '94783'
+    run_name: '2024-05-19 00:56:18.180209'
+    force: 20
+  command:
+    x: 0
+    y: 0
+    t: 15
+    h: 0.75
+- idx: 8
+  name: commandability for 2 cassie in rectangle at x=0, y=0, t=0, h=0.75, force=40,
+    policy=trained_2_torque_joint_force_randomize_weight
+  env:
+    num_cassie: 2
+    terrain: cassiepede_centralized
+    time_horizon: 1000
+    policy: trained_2_torque_joint_force_randomize_weight
+    checkpoint: '94783'
+    run_name: '2024-05-19 00:56:18.180209'
+    force: 40
+  command:
+    x: 0
+    y: 0
+    t: 0
+    h: 0.75
+- idx: 9
+  name: commandability for 2 cassie in rectangle at x=1, y=0, t=0, h=0.75, force=40,
+    policy=trained_2_torque_joint_force_randomize_weight
+  env:
+    num_cassie: 2
+    terrain: cassiepede_centralized
+    time_horizon: 1000
+    policy: trained_2_torque_joint_force_randomize_weight
+    checkpoint: '94783'
+    run_name: '2024-05-19 00:56:18.180209'
+    force: 40
+  command:
+    x: 1
+    y: 0
+    t: 0
+    h: 0.75
+- idx: 10
+  name: commandability for 2 cassie in rectangle at x=0, y=0.25, t=0, h=0.75, force=40,
+    policy=trained_2_torque_joint_force_randomize_weight
+  env:
+    num_cassie: 2
+    terrain: cassiepede_centralized
+    time_horizon: 1000
+    policy: trained_2_torque_joint_force_randomize_weight
+    checkpoint: '94783'
+    run_name: '2024-05-19 00:56:18.180209'
+    force: 40
+  command:
+    x: 0
+    y: 0.25
+    t: 0
+    h: 0.75
+- idx: 11
+  name: commandability for 2 cassie in rectangle at x=0, y=0, t=15, h=0.75, force=40,
+    policy=trained_2_torque_joint_force_randomize_weight
+  env:
+    num_cassie: 2
+    terrain: cassiepede_centralized
+    time_horizon: 1000
+    policy: trained_2_torque_joint_force_randomize_weight
+    checkpoint: '94783'
+    run_name: '2024-05-19 00:56:18.180209'
+    force: 40
+  command:
+    x: 0
+    y: 0
+    t: 15
+    h: 0.75
+- idx: 12
+  name: commandability for 2 cassie in rectangle at x=0, y=0, t=0, h=0.75, force=60,
+    policy=trained_2_torque_joint_force_randomize_weight
+  env:
+    num_cassie: 2
+    terrain: cassiepede_centralized
+    time_horizon: 1000
+    policy: trained_2_torque_joint_force_randomize_weight
+    checkpoint: '94783'
+    run_name: '2024-05-19 00:56:18.180209'
+    force: 60
+  command:
+    x: 0
+    y: 0
+    t: 0
+    h: 0.75
+- idx: 13
+  name: commandability for 2 cassie in rectangle at x=1, y=0, t=0, h=0.75, force=60,
+    policy=trained_2_torque_joint_force_randomize_weight
+  env:
+    num_cassie: 2
+    terrain: cassiepede_centralized
+    time_horizon: 1000
+    policy: trained_2_torque_joint_force_randomize_weight
+    checkpoint: '94783'
+    run_name: '2024-05-19 00:56:18.180209'
+    force: 60
+  command:
+    x: 1
+    y: 0
+    t: 0
+    h: 0.75
+- idx: 14
+  name: commandability for 2 cassie in rectangle at x=0, y=0.25, t=0, h=0.75, force=60,
+    policy=trained_2_torque_joint_force_randomize_weight
+  env:
+    num_cassie: 2
+    terrain: cassiepede_centralized
+    time_horizon: 1000
+    policy: trained_2_torque_joint_force_randomize_weight
+    checkpoint: '94783'
+    run_name: '2024-05-19 00:56:18.180209'
+    force: 60
+  command:
+    x: 0
+    y: 0.25
+    t: 0
+    h: 0.75
+- idx: 15
+  name: commandability for 2 cassie in rectangle at x=0, y=0, t=15, h=0.75, force=60,
+    policy=trained_2_torque_joint_force_randomize_weight
+  env:
+    num_cassie: 2
+    terrain: cassiepede_centralized
+    time_horizon: 1000
+    policy: trained_2_torque_joint_force_randomize_weight
+    checkpoint: '94783'
+    run_name: '2024-05-19 00:56:18.180209'
+    force: 60
+  command:
+    x: 0
+    y: 0
+    t: 15
+    h: 0.75
+- idx: 16
+  name: commandability for 2 cassie in rectangle at x=0, y=0, t=0, h=0.75, force=80,
+    policy=trained_2_torque_joint_force_randomize_weight
+  env:
+    num_cassie: 2
+    terrain: cassiepede_centralized
+    time_horizon: 1000
+    policy: trained_2_torque_joint_force_randomize_weight
+    checkpoint: '94783'
+    run_name: '2024-05-19 00:56:18.180209'
+    force: 80
+  command:
+    x: 0
+    y: 0
+    t: 0
+    h: 0.75
+- idx: 17
+  name: commandability for 2 cassie in rectangle at x=1, y=0, t=0, h=0.75, force=80,
+    policy=trained_2_torque_joint_force_randomize_weight
+  env:
+    num_cassie: 2
+    terrain: cassiepede_centralized
+    time_horizon: 1000
+    policy: trained_2_torque_joint_force_randomize_weight
+    checkpoint: '94783'
+    run_name: '2024-05-19 00:56:18.180209'
+    force: 80
+  command:
+    x: 1
+    y: 0
+    t: 0
+    h: 0.75
+- idx: 18
+  name: commandability for 2 cassie in rectangle at x=0, y=0.25, t=0, h=0.75, force=80,
+    policy=trained_2_torque_joint_force_randomize_weight
+  env:
+    num_cassie: 2
+    terrain: cassiepede_centralized
+    time_horizon: 1000
+    policy: trained_2_torque_joint_force_randomize_weight
+    checkpoint: '94783'
+    run_name: '2024-05-19 00:56:18.180209'
+    force: 80
+  command:
+    x: 0
+    y: 0.25
+    t: 0
+    h: 0.75
+- idx: 19
+  name: commandability for 2 cassie in rectangle at x=0, y=0, t=15, h=0.75, force=80,
+    policy=trained_2_torque_joint_force_randomize_weight
+  env:
+    num_cassie: 2
+    terrain: cassiepede_centralized
+    time_horizon: 1000
+    policy: trained_2_torque_joint_force_randomize_weight
+    checkpoint: '94783'
+    run_name: '2024-05-19 00:56:18.180209'
+    force: 80
+  command:
+    x: 0
+    y: 0
+    t: 15
+    h: 0.75
+- idx: 20
+  name: commandability for 2 cassie in rectangle at x=0, y=0, t=0, h=0.75, force=100,
+    policy=trained_2_torque_joint_force_randomize_weight
+  env:
+    num_cassie: 2
+    terrain: cassiepede_centralized
+    time_horizon: 1000
+    policy: trained_2_torque_joint_force_randomize_weight
+    checkpoint: '94783'
+    run_name: '2024-05-19 00:56:18.180209'
+    force: 100
+  command:
+    x: 0
+    y: 0
+    t: 0
+    h: 0.75
+- idx: 21
+  name: commandability for 2 cassie in rectangle at x=1, y=0, t=0, h=0.75, force=100,
+    policy=trained_2_torque_joint_force_randomize_weight
+  env:
+    num_cassie: 2
+    terrain: cassiepede_centralized
+    time_horizon: 1000
+    policy: trained_2_torque_joint_force_randomize_weight
+    checkpoint: '94783'
+    run_name: '2024-05-19 00:56:18.180209'
+    force: 100
+  command:
+    x: 1
+    y: 0
+    t: 0
+    h: 0.75
+- idx: 22
+  name: commandability for 2 cassie in rectangle at x=0, y=0.25, t=0, h=0.75, force=100,
+    policy=trained_2_torque_joint_force_randomize_weight
+  env:
+    num_cassie: 2
+    terrain: cassiepede_centralized
+    time_horizon: 1000
+    policy: trained_2_torque_joint_force_randomize_weight
+    checkpoint: '94783'
+    run_name: '2024-05-19 00:56:18.180209'
+    force: 100
+  command:
+    x: 0
+    y: 0.25
+    t: 0
+    h: 0.75
+- idx: 23
+  name: commandability for 2 cassie in rectangle at x=0, y=0, t=15, h=0.75, force=100,
+    policy=trained_2_torque_joint_force_randomize_weight
+  env:
+    num_cassie: 2
+    terrain: cassiepede_centralized
+    time_horizon: 1000
+    policy: trained_2_torque_joint_force_randomize_weight
+    checkpoint: '94783'
+    run_name: '2024-05-19 00:56:18.180209'
+    force: 100
+  command:
+    x: 0
+    y: 0
+    t: 15
+    h: 0.75

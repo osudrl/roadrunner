@@ -1,0 +1,42 @@
+{
+    "base_progress": {
+        "weighting": 0.3,
+        "scaling": 5.0
+    },
+    "orientation": {
+        "weighting": 0.125,
+        "scaling": 30
+    },
+    "left_force": {
+        "weighting": 0.125,
+        "scaling": 0.01
+    },
+    "right_force": {
+        "weighting": 0.125,
+        "scaling": 0.01
+    },
+    "left_speed": {
+        "weighting": 0.125,
+        "scaling": 1
+    },
+    "right_speed": {
+        "weighting": 0.125,
+        "scaling": 1
+    },
+    "stable_base": {
+        "weighting": 0.025,
+        "scaling": 0.1
+    },
+    "ctrl_penalty": {
+        "weighting": 0.025,
+        "scaling": 5.0
+    },
+    "trq_penalty": {
+        "weighting": 0.025,
+        "scaling": 0.05
+    },
+    "footstep": {
+        "weighting": 3,
+        "scaling": 10
+    }
+}

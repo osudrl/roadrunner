@@ -1,0 +1,49 @@
+{
+    "normalize": false,
+    "weights": {
+        "x_vel": {
+            "weighting": 0.15,
+            "scaling": 2.0
+        },
+        "y_vel": {
+            "weighting": 0.1,
+            "scaling": 2.0
+        },
+        "orientation": {
+            "weighting": 0.15,
+            "scaling": 30
+        },
+        "feet_air_time": {
+            "weighting": 1.0,
+            "kernel": false
+        },
+        "feet_contact": {
+            "weighting": 0.1,
+            "kernel": false
+        },
+        "stance_x": {
+            "weighting": 0.02,
+            "scaling": 10
+        },
+        "stance_y": {
+            "weighting": 0.02,
+            "scaling": 5
+        },
+        "stable_base": {
+            "weighting": 0.1,
+            "scaling": 0.01
+        },
+        "ctrl_penalty": {
+            "weighting": 0.1,
+            "scaling": 8.0
+        },
+        "trq_penalty": {
+            "weighting": 0.05,
+            "scaling": 1.0
+        },
+        "arm": {
+            "weighting": 0.02,
+            "scaling": 3.0
+        }
+    }
+}

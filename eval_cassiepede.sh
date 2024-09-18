@@ -1,0 +1,79 @@
+export PYTHONPATH=.
+export WANDB_API_KEY=
+python algo/cassiepede/evaluation.py \
+  --hidden_dim 64 \
+  --lstm_hidden_dim 64 \
+  --lstm_num_layers 2 \
+  --set_adam_eps \
+  --eps 1e-5 \
+  --use_orthogonal_init \
+  --seed 0 \
+  --project_name roadrunner_cassiepede \
+  --num_cassie_prob 0 0 0 0 1 \
+  --num_cassie_prob 0 1 \
+  --num_cassie_prob 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 \
+  --num_cassie_prob 0 0 0 0 0 1 \
+  --num_cassie_prob 0 0 0 1 \
+  --num_cassie_prob 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 \
+  --num_cassie_prob 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 \
+  --num_cassie_prob 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 \
+  --num_cassie_prob 0 1 \
+  --num_cassie_prob 0 0 0 0 0 0 0 0 0 1 \
+  --num_cassie_prob 0 0 1 \
+  --position_offset 1.0 \
+  --position_offset 0.0 \
+  --std 0.13 \
+  --poi_heading_range 1.05 \
+  --poi_heading_range 0.0 \
+  --poi_position_offset 1.5 \
+  --poi_position_offset 0.0 \
+  --time_horizon 50000 \
+  --project_name roadrunner_masking \
+  --project_name roadrunner_cassiemultirobot \
+  --project_name roadrunner_cassiepede \
+  --reward_name locomotion_cassiepede_clock_stand \
+  --reward_name locomotion_cassiepede \
+  --reward_name locomotion_cassiemultirobot \
+  --reward_name locomotion_cassiepede_feetairtime_modified \
+  --perturbation_force 0.0 \
+  --perturbation_force 50.0 \
+  --force_prob 1 \
+  --force_prob 0.0 \
+  --runs_name "2024-03-25 19:49:23.873105" \
+  --runs_name "2024-04-23 03:49:18.121881" \
+  --runs_name "2024-04-25 00:07:14.922022" \
+  --runs_name "2024-04-25 00:24:28.149728" \
+  --runs_name "2024-04-17 22:29:15.433898" \
+  --runs_name "2024-05-04 23:38:01.307283" \
+  --runs_name "2024-04-29 11:57:52.442484" \
+  --runs_name "2024-04-21 22:42:28.253635" \
+  --runs_name "2024-03-29 13:14:56.493540" \
+  --runs_name "2024-04-21 19:35:52.588902" \
+  --runs_name "2024-05-07 00:34:48.881196" \
+  --runs_name "2024-05-07 00:34:48.881196" \
+  --runs_name "2024-04-13 21:56:36.012260" \
+  --runs_name "2024-05-19 02:11:35.593473" \
+  --runs_name "2024-05-19 00:33:34.018608" \
+  --runs_name "2024-05-20 19:05:06.757875" \
+  --runs_name "2024-05-21 12:54:03.393531" \
+  --runs_name "2024-05-21 12:54:03.393531" \
+  --runs_name "2024-05-01 10:30:51.809112" \
+  --runs_name "2024-04-21 22:42:28.253635" \
+  --runs_name "2024-05-21 12:54:03.393531" \
+  --runs_name "2024-05-19 00:56:18.180209" \
+  --runs_name "2024-05-20 19:05:06.757875" \
+  --runs_name "2024-06-08 12:30:56.187278" "2024-05-20 19:05:06.757875" \
+  --runs_name "2024-06-08 12:30:56.187278" \
+  --runs_name "2024-05-20 19:05:06.757875" \
+  --model_checkpoint 12499 \
+  --model_checkpoint 49999 \
+  --model_checkpoint 2501 \
+  --model_checkpoint latest \
+  --evaluation_mode 'interactive' \
+  --evaluation_mode 'random' \
+  --evaluation_mode 'navigation' \
+  --navigation 'algo/cassiepede/benchmark/configs/trained3_num_cassie4_navigation_2.yaml'
+#  --redownload_checkpoint \
+#  --mask_tarsus_input \
+#  --model_checkpoint 41875 \
+#  --clock_type von_mises \

@@ -1,0 +1,17 @@
+{
+  "normalize": false,
+  "weights": {
+    "x_vel": {
+      "weighting": 0.333,
+      "scaling": 2.0
+    },
+    "y_vel": {
+      "weighting": 0.333,
+      "scaling": 2.0
+    },
+    "orientation": {
+      "weighting": 0.333,
+      "scaling": 5.0
+    }
+  }
+}

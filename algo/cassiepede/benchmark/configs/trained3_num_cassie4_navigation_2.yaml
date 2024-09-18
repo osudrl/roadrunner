@@ -1,0 +1,68 @@
+n_traj: 1
+benchmarks:
+  - idx: 0
+    name: navigating 4 cassies with rectangle and payload of 20kg at force=0
+      policy=trained_3_torque_joint_force_randomize_weight
+    env:
+      num_cassie: 4
+      terrain: cassiepede_rectangle
+      policy: trained_3_torque_joint_force_randomize_weight
+      checkpoint: latest
+      run_name: '2024-05-20 19:05:06.757875'
+      force: 0
+    command_schedule:
+      - x: 1.0
+        y: 0
+        t: 0
+        h: 0.75
+        duration: 10
+      - x: 0
+        y: 0
+        t: 7.5
+        h: 0.75
+        duration: 12
+      - x: 0.5
+        y: 0
+        t: 0
+        h: 0.75
+        duration: 10
+      - x: 0
+        y: 0
+        t: 5
+        h: 0.75
+        duration: 18
+      - x: 0.6
+        y: 0
+        t: 0
+        h: 0.75
+        duration: 5
+      - x: 0
+        y: 0
+        t: -7.5
+        h: 0.75
+        duration: 12
+      - x: 0.4
+        y: 0
+        t: 0
+        h: 0.75
+        duration: 10
+      - x: 0
+        y: 0
+        t: 9
+        h: 0.75
+        duration: 10
+      - x: 1
+        y: 0
+        t: 0
+        h: 0.75
+        duration: 7
+      - x: 0
+        y: 0
+        t: 7.5
+        h: 0.75
+        duration: 12
+      - x: 0.9
+        y: 0
+        t: 0
+        h: 0.75
+        duration: 10
