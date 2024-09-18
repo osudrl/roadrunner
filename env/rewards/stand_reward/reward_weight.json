@@ -1,0 +1,57 @@
+{
+    "normalize": false,
+    "weights": {
+        "height_penalty": {
+            "weighting": 0.1,
+            "scaling": 3.0
+        },
+        "arm": {
+            "weighting": 0.1,
+            "scaling": 3
+        },
+        "base_orientation": {
+            "weighting": 0.1,
+            "scaling": 30
+        },
+        "l_foot_orientation": {
+            "weighting": 0.05,
+            "scaling": 20
+        },
+        "r_foot_orientation": {
+            "weighting": 0.05,
+            "scaling": 20
+        },
+        "foot_vel_penalty": {
+            "weighting": 0.1,
+            "scaling": 0.2
+        },
+        "motor_vel_penalty": {
+            "weighting": 0.1,
+            "scaling": 0.2
+        },
+        "com": {
+            "weighting": 0.1,
+            "scaling": 10
+        },
+        "stance_width": {
+            "weighting": 0.1,
+            "scaling": 5
+        },
+        "stance_x": {
+            "weighting": 0.05,
+            "scaling": 10
+        },
+        "ctrl_penalty": {
+            "weighting": 0.1,
+            "scaling": 5.0
+        },
+        "trq_penalty": {
+            "weighting": 0.05,
+            "scaling": 0.05
+        },
+        "self_collision": {
+            "weighting": 1.0,
+            "kernel": false
+        }
+    }
+}

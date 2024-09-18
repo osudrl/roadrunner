@@ -1,0 +1,49 @@
+a_lr: 0.0003
+action_dim: 10
+arch: lstm
+backprop_workers: -1
+batch_size: 8
+bounded: False
+c_lr: 0.0003
+clip: 0.2
+discount: 0.95
+do_prenorm: False
+dynamics_randomization: True
+entropy_coeff: 0.0
+env_name: LocomotionEnv
+epochs: 5
+eps: 1e-06
+eval_freq: 200
+gae_lambda: 0.95
+grad_clip: 0.05
+integral_action: False
+kl: 0.02
+layers: 64,64
+learn_stddev: False
+mirror: 1
+nonlinearity: relu
+num_eval_eps: 50
+num_steps: 50000
+obs_dim: 38
+policy_rate: 50
+prenorm: False
+prenormalize_steps: 100
+previous: 
+redis: None
+reward_name: feet_air_time
+robot_name: cassie
+simulator_type: mujoco
+state_est: False
+state_noise: [0.05, 0.1, 0.01, 0.1, 0.01, 0.1]
+std: 0.13
+std_array: 
+terrain: flat
+timesteps: 300000000.0
+traj_len: 300
+update_norm: False
+velocity_noise: 0.0
+wandb: True
+wandb_dir: /tier1/osu/bartvm/wandb
+wandb_group_name: confirm envs
+wandb_project_name: no_clocks_baby
+workers: 80
