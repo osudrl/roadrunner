@@ -51,14 +51,14 @@ def test_all_sim():
 
 def test_sim_init(sim):
     print("Making sim")
-    test_sim = sim()
+    test_sim = sim(fast=False)
     test_sim.reset()
     print("Passed made sim")
     return True
 
 def test_sim_sim_forward(sim):
     print("Testing sim forward")
-    test_sim = sim()
+    test_sim = sim(fast=False)
     test_sim.reset()
     for i in range(100):
         test_sim.sim_forward()
@@ -68,7 +68,7 @@ def test_sim_sim_forward(sim):
 
 def test_sim_viewer(sim):
     print("Testing sim viewer, quit window to continue")
-    test_sim = sim()
+    test_sim = sim(fast=False)
     test_sim.reset()
     test_sim.viewer_init()
     render_state = test_sim.viewer_render()
@@ -89,7 +89,7 @@ def test_sim_viewer_marker(sim):
         print("Bypass libcassie for viewer marker test.")
         return True
     print("Testing sim viewer marker rendering, don't quit window yet")
-    test_sim = sim()
+    test_sim = sim(fast=False)
     test_sim.reset()
     test_sim.viewer_init()
     render_state = test_sim.viewer_render()
@@ -130,7 +130,7 @@ def test_sim_glfw_multiple_viewer(sim):
     print("Testing sim viewer, quit window to continue")
     # TODO: when closing one window, the other window will be black, because we are free mjContext
     # when closing one window in mjViewer.close(). Need to fix this.
-    test_sim = sim()
+    test_sim = sim(fast=False)
     test_sim.reset()
     test_sim.viewer_init(width=800, height=800)
     vis1 = test_sim.viewer
@@ -164,7 +164,7 @@ def test_sim_glfw_multiple_viewer(sim):
 
 def test_sim_PD(sim):
     print("Testing sim PD")
-    test_sim = sim()
+    test_sim = sim(fast=False)
     test_sim.reset()
     test_sim.set_base_position(np.array([0, 0, 1.5]))
     test_sim.hold()
@@ -174,9 +174,10 @@ def test_sim_PD(sim):
     render_state = test_sim.viewer_render()
     while render_state:
         start_t = time.time()
-        for _ in range(50):
-            test_sim.set_PD(test_sim.offset, np.zeros(test_sim.num_actuators), test_sim.kp, test_sim.kd)
-            test_sim.sim_forward()
+        if not test_sim.viewer_paused():
+            for _ in range(50):
+                test_sim.set_PD(test_sim.offset, np.zeros(test_sim.num_actuators), test_sim.kp, test_sim.kd)
+                test_sim.sim_forward()
         render_state = test_sim.viewer_render()
         delaytime = max(0, 50/2000 - (time.time() - start_t))
         time.sleep(delaytime)
@@ -190,7 +191,7 @@ def test_sim_PD(sim):
 
 def test_sim_drop(sim):
     print("Testing sim PD")
-    test_sim = sim()
+    test_sim = sim(fast=False)
     test_sim.reset()
     test_sim.set_base_position(np.array([0, 0, 1.5]))
     test_sim.viewer_init()
@@ -209,7 +210,7 @@ def test_sim_drop(sim):
 def test_sim_get_set(sim):
     print("Testing sim getter and setter functions")
     motor_name = CASSIE_MOTOR_NAME if 'cassie' in sim.__name__.lower() else DIGIT_MOTOR_NAME
-    test_sim = sim()
+    test_sim = sim(fast=False)
     test_sim.reset()
     # Test getters
     test_sim.get_joint_position()
@@ -249,7 +250,7 @@ def test_sim_get_set(sim):
     return True
 
 def test_sim_indexes(sim):
-    test_sim = sim()
+    test_sim = sim(fast=False)
     test_sim.reset()
 
     motor_name = CASSIE_MOTOR_NAME if 'cassie' in sim.__name__.lower() else DIGIT_MOTOR_NAME
@@ -276,7 +277,7 @@ def test_sim_indexes(sim):
     return True
 
 def test_sim_body_pose(sim):
-    test_sim = sim()
+    test_sim = sim(fast=False)
     test_sim.reset()
     x_target = np.array([0, 0, 1.5, 0, 0, 0, 1])
     test_sim.set_base_position(x_target[:3])
@@ -303,7 +304,7 @@ def test_sim_body_pose(sim):
     return True
 
 def test_sim_body_velocity(sim):
-    test_sim = sim()
+    test_sim = sim(fast=False)
     test_sim.reset()
     # NOTE: use small velocity here to avoid creating out of axis velocities, ie, if the torso has
     # inertia like Digit, set dtheta_x=1 will cause other axis to have velocities even sim 1 step.
@@ -330,7 +331,7 @@ def test_sim_body_velocity(sim):
     return True
 
 def test_sim_body_acceleration(sim):
-    test_sim = sim()
+    test_sim = sim(fast=False)
     test_sim.reset()
     test_sim.hold()
     test_sim.sim_forward(dt=3)
@@ -370,7 +371,7 @@ def test_sim_relative_pose(sim):
     """Tilt torso/base + 10deg in pitch and measure feet flat (should be -10deg pitch)
     on ground angle diff in base frame.
     """
-    test_sim = sim()
+    test_sim = sim(fast=False)
     test_sim.reset()
     # Slightly tilted down
     x_target = np.array([0, 0, 1, 0.9961947, 0, 0.0871557, 0])
@@ -417,7 +418,7 @@ def test_sim_hfield(sim):
         print("Bypass libcassie for dual window render.")
         return True
     print("Testing sim hfield, quit window to continue")
-    test_sim = sim(terrain='hfield')
+    test_sim = sim(fast=False, terrain='hfield')
     test_sim.viewer_init()
     test_sim.reset()
     test_sim.randomize_hfield(hfield_type='noisy')
