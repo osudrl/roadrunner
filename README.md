@@ -78,3 +78,6 @@ The repo is split into 6 main folders. Each contains it's own readme with furthe
 
 ## Notes
 This repository is provided completely as is and is intended purely as an open sourcing of specific paper codebases and other related code. While things should work, functionality, future support and compatility, requests for changes/features, etc. are not guaranteed. Also note that this is very specific research code and was not made with total generality in mind like Gym or stable-baselines.
+
+## Acknowledgements
+This codebase was created by students at the [DRAIL](https://mime.engineering.oregonstate.edu/research/drl/) lab at Oregon State University. It is based off of previous lab repos like [apex](https://github.com/osudrl/apex). which itself is based off of and inspired by repos from @ikostrikov, @rll, @OpenAI, @sfujim, and @modestyachts.
