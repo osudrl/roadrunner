@@ -1,4 +1,4 @@
-# Roadrunner Refactor
+# Roadrunner
 
 ## Setup Instructions
 Conda is required to run the setup script included with this repository.
@@ -77,6 +77,8 @@ The repo is split into 6 main folders. Each contains it's own readme with furthe
 - [`util`](util): Contains repo wide utility functions. Only utilities that are used across multiple of the above folders, or in scripts at the top level should be here. Otherwise they should go into the corresponding folder's util folder.
 
 ## Notes
+Paper code based off of this main branch can be found in the other branches of this repository.
+
 This repository is provided completely as is and is intended purely as an open sourcing of specific paper codebases and other related code. While things should work, functionality, future support and compatility, requests for changes/features, etc. are not guaranteed. Also note that this is very specific research code and was not made with total generality in mind like Gym or stable-baselines.
 
 ## Acknowledgements
